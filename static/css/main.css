@@ -1,0 +1,19 @@
+/* 全体を中央に寄せるための設定 */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;  /* 横方向中央 */
+    align-items: center;      /* 縦方向中央 */
+    font-family: sans-serif;
+    background-color: #f8f8f8;  /* 好みで背景色も */
+}
+
+/* 中央表示されるコンテンツ */
+.content {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 400px;
+}
