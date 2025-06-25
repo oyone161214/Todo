@@ -1,3 +1,5 @@
+<!-- アップデート用のページ -->
+<!-- 「base.html」のjinja2と関連付ける -->
 {% extends 'base.html' %}
 
 {% block head %}
@@ -8,9 +10,9 @@
 <div class = "content">
     <h1 style = "text-align: center">Update Task</h1>
 
-
-
+    <!--入力部分-->
     <div class = "form">
+        <!--入力情報の送信先と送信方法-->
         <form action = "/update/{{task.id}}" method = "POST">
             <input type = "text" name = "content" id = "content" value = "{{task.content}}">
             <input type = "submit" value = "Update">
@@ -18,3 +20,10 @@
     </div>
 </div>
 {% endblock %}
+
+<!-- １、index.html の <a href="/update/{{task.id}}"> が押される
+     ２、app.py の def update(id) が呼び出される 
+     ３，update関数の中の else: により、 update.html が表示 
+     ４，このページのフォームで入力された情報が、update関数に帰る
+     ５，update関数の if: で更新する
+-->

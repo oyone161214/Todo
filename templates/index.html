@@ -1,26 +1,41 @@
-{% extends 'base.html' %}
+<!--Todoの基本となるページ-->
+<!-- 「base.html」のjinja2と関連付ける -->
+{% extends 'base.html' %} 
 
+
+<!-- headの設定 -->
 {% block head %}
 <title>Task Master</title>
 {% endblock %}
 
+
+<!-- bodyの設定 -->
 {% block body %}
-<div class = "content">
+<div class = "content"> 
     <h1 style = "text-align: center">Task Master</h1>
+
+    <!--タスクがないときの表示-->
     {% if tasks|length < 1 %}
     <h4　style = "text-align: center">タスクがありません。新しく作成してください</h4>
     {% else%}
 
+    <!-- 行と列を設定し、表を作る -->
     <table>
+        <!--表の一行目（列名）-->
         <tr>
             <th>Task</th>
             <th>Added</th>
             <th>Actions</th>
         </tr>
+
+        <!-- 「app.py」のtasksリストの要素を順番に取り出し、taskに代入 -->
         {% for task in tasks %}
+            <!-- 表の二行目以降（要素） -->
             <tr>
+                <!--データセルに対する操作　日付順に並べられたTodo.contentとその日付を挿入-->
                 <td>{{ task.content }}</td>
                 <td>{{ task.date_created.date()}}</td>
+                <!--DELETE操作とUPDATE操作ボタン-->
                 <td>
                     <a href = "/delete/{{task.id}}">Delete</a>
                     <br>
@@ -31,9 +46,13 @@
     </table>
     {% endif %}
 
+    <!--入力部分-->
     <div class = "form">
+        <!--入力情報の送信先と送信方法。今回の場合、[app.py]に送信される。-->
         <form action = "/" method = "POST">
+            <!--テキスト入力部分。内容はnameとidに代入される-->
             <input type = "text" name = "content" id = "content">
+            <!--Add Taskボタン-->
             <input type = "submit" value = "Add Task">
         </form>
     </div>

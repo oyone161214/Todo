@@ -1,13 +1,20 @@
+<!--  
+  ウェブサイト全体のレイアウトをする基盤となるファイル
+  jinja2でほかのファイルからHTMLを挿入する
+  -->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href="{{url_for('static', filename='css/main.css')  }}">
+    <!-- ほかのファイルでヘッダーを設定し、ここに挿入する。 -->
     {% block head %}{% endblock %}
 </head>
 
 <body>
+    <!-- ほかのファイルでコンテンツを設定し、ここに挿入する。 -->
     {% block body %}{% endblock %}
 </body>
 </html>
