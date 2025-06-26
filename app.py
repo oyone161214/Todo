@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy  #データベース
 from datetime import datetime, timezone  #日付
 
-#FlaskでWebアプリを始める
+#FlaskでWebアプリを作る
 app = Flask(__name__) 
 # app のDB保存先 test.db
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  
@@ -57,8 +57,12 @@ def index():
 # DELETEボタンが押されたとき
 @app.route('/delete/<int:id>')
 def delete(id):
+
+    # Todo から DALETE を押した id のタスクを取得。結果はGETか404エラー。
     task_to_delete = Todo.query.get_or_404(id)
 
+    #例外処理
+    # delete⇒ commit⇒ 反映
     try:
         db.session.delete(task_to_delete)
         db.session.commit()
@@ -66,24 +70,37 @@ def delete(id):
     except:
         return 'タスクの削除中に問題が発生しました'
     
-# UPDATEボタンが押されたとき
+# UPDATEボタンが押されたとき(GET or POST)
 @app.route('/update/<int:id>', methods = ['GET', 'POST'])
 def update(id):
 
-    #TodoからIDデータを取り出す。結果はGETか404エラー。
+    # Todo から UPDATE を押した id のタスクを取得。結果はGETか404エラー。
     task = Todo.query.get_or_404(id)
 
+    # update.html の form から更新情報(content)が送られてきたとき
     if request.method == 'POST':
+        # その ID のタスクに content を直接代入する。
         task.content = request.form['content']
 
+        #例外処理
+        # commit⇒ 反映
         try:
             db.session.commit()
             return redirect('/')
         except:
             return 'アップデート中に問題が発生しました'
+    #UPDATEボタンが押されたときに update.html を表示する
+    #その際に定義した task(id / content etc) を変数として送っている
     else:
         return render_template('update.html', task = task)
 
+
+# __name__ = 現在実行されているファイルの役割を伝える変数
+# __main__ = このファイルから直接実行されている時の値
+
+# 別のファイルからはページが開けない様にできる。
+# 　⇒ app.pyからプログラムを実行したとき、アプリが起動される。
 if __name__ == "__main__":
+    # Flask の web アプリを起動する
     app.run(debug = True)
 
