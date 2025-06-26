@@ -94,13 +94,10 @@ def update(id):
     else:
         return render_template('update.html', task = task)
 
-
+# システムを実行する
 # __name__ = 現在実行されているファイルの役割を伝える変数
 # __main__ = このファイルから直接実行されている時の値
-
-# 別のファイルからはページが開けない様にできる。
-# 　⇒ app.pyからプログラムを実行したとき、アプリが起動される。
+# つまり、別のファイルからはページが開けない ⇒ app.pyからプログラムを実行したときのみ、アプリが起動される。
 if __name__ == "__main__":
     # Flask の web アプリを起動する
     app.run(debug = True)
-
