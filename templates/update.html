@@ -12,7 +12,7 @@
 
     <!--入力部分-->
     <div class = "form">
-        <!--入力情報の送信先と送信方法-->
+        <!--入力情報の送信先[app.py の def update]と送信方法-->
         <form action = "/update/{{task.id}}" method = "POST">
             <input type = "text" name = "content" id = "content" value = "{{task.content}}">
             <input type = "submit" value = "Update">
@@ -23,7 +23,7 @@
 
 <!-- １、index.html の <a href="/update/{{task.id}}"> が押される
      ２、app.py の def update(id) が呼び出される 
-     ３，update関数の中の else: により、 update.html が表示 
+     ３，update関数の中の else: により、 指定の task を持つ update.html が表示 
      ４，このページのフォームで入力された情報が、update関数に帰る
      ５，update関数の if: で更新する
 -->

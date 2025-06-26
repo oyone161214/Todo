@@ -35,7 +35,7 @@
                 <!--データセルに対する操作　日付順に並べられたTodo.contentとその日付を挿入-->
                 <td>{{ task.content }}</td>
                 <td>{{ task.date_created.date()}}</td>
-                <!--DELETE操作とUPDATE操作ボタン-->
+                <!--DELETE操作とUPDATE操作の関数に飛ぶURIボタン-->
                 <td>
                     <a href = "/delete/{{task.id}}">Delete</a>
                     <br>
